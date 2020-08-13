@@ -1,4 +1,5 @@
-//test commit 
+//test commit
+//
 #define BLUE 2
 #define GREEN 3
 #define YELLOW 4
@@ -139,7 +140,7 @@ int readAlcohol_FROM_Sensor() {
 
 void printAlcoholLevelOnLED(int value)
 {
-    if (value > 100 && value < 249)
+    if (value < 100)
     {
         Serial.println("No alcohol");
         digitalWrite(BLUE, HIGH);
@@ -147,7 +148,14 @@ void printAlcoholLevelOnLED(int value)
         digitalWrite(YELLOW, LOW);
         digitalWrite(RED, LOW);
     }
-    else if (value >= 250 && value < 300)
+    else if (value > 101 && value < 200) {
+        Serial.println("Somme alcohol");
+        digitalWrite(BLUE, HIGH);
+        digitalWrite(GREEN, HIGH);
+        digitalWrite(YELLOW, LOW);
+        digitalWrite(RED, LOW);
+    }
+    else if (value > 201 && value < 300)
     {
         Serial.println("Low alcohol level.");
         digitalWrite(BLUE, LOW);
@@ -155,18 +163,32 @@ void printAlcoholLevelOnLED(int value)
         digitalWrite(YELLOW, LOW);
         digitalWrite(RED, LOW);
     }
-    else if (value >= 300 && value < 350)
+    else if (value > 301 && value < 400)
     {
-
+        Serial.println("Warning level");
+        digitalWrite(BLUE, LOW);
+        digitalWrite(GREEN, HIGH);
+        digitalWrite(YELLOW, HIGH);
+        digitalWrite(RED, LOW);
+    }
+     else if (value > 401 && value < 500)
+    {
         Serial.println("Warning level");
         digitalWrite(BLUE, LOW);
         digitalWrite(GREEN, LOW);
         digitalWrite(YELLOW, HIGH);
         digitalWrite(RED, LOW);
     }
-    else if (value >= 350)
+     else if (value > 501 && value < 600)
     {
-
+        Serial.println("HIGH level");
+        digitalWrite(BLUE, LOW);
+        digitalWrite(GREEN, LOW);
+        digitalWrite(YELLOW, HIGH);
+        digitalWrite(RED, HIGH);
+    }          
+    else if (value > 601 )
+    {
         Serial.println("HIGH alcohol Level");
         digitalWrite(BLUE, LOW);
         digitalWrite(GREEN, LOW);
@@ -174,5 +196,5 @@ void printAlcoholLevelOnLED(int value)
         digitalWrite(RED, HIGH);
     }
 
-    delay(1000);
+    delay(10000);
 }
